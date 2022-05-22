@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.9.xsd">
+    <changeSet id="CREATE_TABLE_ORGANIZATIONS" author="Verevkin K. A.">
+        <createTable tableName="organizations">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" primaryKeyName="organizations_id_pk" />
+            </column>
+            <column name="inn" type="varchar(12)" />
+            <column name="ogrn" type="varchar(13)" />
+            <column name="org_type" type="varchar(2)" />
+            <column name="fullname" type="varchar(1000)" />
+            <column name="short_name" type="varchar(1000)" />
+        </createTable>
+        <createIndex indexName="inn_unique_idx" tableName="organizations" unique="true">
+            <column name="inn" />
+        </createIndex>
+        <createIndex indexName="composite_idx" tableName="organizations">
+            <column name="inn" />
+            <column name="org_type" />
+        </createIndex>
+        <createIndex indexName="composite2_idx" tableName="organizations">
+            <column name="inn" />
+            <column name="org_type" />
+            <column name="ogrn" />
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
